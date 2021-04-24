@@ -1,32 +1,10 @@
-
-
-
 import 'dart:async';
-import 'dart:io';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 
-void main() {
-  runApp(MyApp());
- 
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Kamera Uygulaması",
-      debugShowCheckedModeBanner: false, //debug yazısını kaldır.
-      theme: ThemeData(
-        primarySwatch: Colors.indigo
-      ),
-      home: cameraApp(),
-
-    );
-  }
-}
 
 class cameraApp extends StatefulWidget {
  
@@ -80,10 +58,10 @@ class _cameraAppstate extends State<cameraApp>{
         title: Text("Birini seçin!"),
         
         
-        content: Text("Seç biriniiii"),
+        content: SingleChildScrollView(
        
-         
-            actions: <Widget>[
+          child: ListBody(
+            children: <Widget>[
               TextButton(
                 child: Text("Galeri"),
                 onPressed: (){
@@ -99,9 +77,9 @@ class _cameraAppstate extends State<cameraApp>{
               ),
 
             ],
-         
-        );
-      
+          ),
+        ),
+      );
     });
   }
 
@@ -111,30 +89,34 @@ class _cameraAppstate extends State<cameraApp>{
     if(imageFile == null)
       {
         return Text(
-            "Resim seçilmedi"
-        );
+            "Resim seçilmedi");    
       }
-    else
-      {
-        return Image.file(imageFile,
+
+    else {
+       var ask= Image.file(imageFile,
         width: 400,
         height: 400,);
-      }
+        return ask;
+     }  
+        
+
   }
+ 
+  
+
+  
+
 
 
   Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Anasayfa"),
-      ),
-
-      body: Container(
+    return  Container(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               _decideImageView(),
+              
+
               RaisedButton(
                 color: Colors.pinkAccent,
                 onPressed: (){
@@ -145,8 +127,8 @@ class _cameraAppstate extends State<cameraApp>{
             ],
           ),
         ),
-      ),
-    );
+      );
+    
   }
 
 
